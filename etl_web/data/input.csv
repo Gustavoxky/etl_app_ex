@@ -1,0 +1,6 @@
+sensor_id,timestamp,temperature,voltage,is_active,location,operator
+101,2025-03-29T08:00:00Z,36.5,220.1,true,Substation A,João Silva
+102,2025-03-29T08:05:00Z,37.1,219.8,true,Substation A,Maria Lima
+103,2025-03-29T08:10:00Z,38.0,221.3,false,Substation B,Carlos Souza
+104,2025-03-29T08:15:00Z,36.2,218.9,true,Substation C,Ana Paula
+105,2025-03-29T08:20:00Z,35.8,220.0,false,Substation B,Felipe Rocha

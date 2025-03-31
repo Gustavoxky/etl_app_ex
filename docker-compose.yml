@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15
+    container_name: etl_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: etl_dev
+    ports:
+      - "15432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  etl_web:
+    build:
+      context: .
+      dockerfile: etl_web/Dockerfile
+    container_name: etl_web
+    depends_on:
+      - db
+    environment:
+      MIX_ENV: prod
+      DATABASE_URL: ecto://postgres:postgres@db/etl_dev
+      SECRET_KEY_BASE: yh92YK1P5Nc8/698Khhq4WzwCF2GnyEc6NsLd8D62GgQr1nH+BRlxpkCkH0/8vIX
+      PHX_HOST: localhost
+      PHX_SERVER: true
+      PORT: 4000
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/app
+    working_dir: /app/etl_web
+    command: [ "mix", "phx.server" ]
+
+volumes:
+  pgdata:
